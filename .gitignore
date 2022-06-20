@@ -1,0 +1,13 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# emacs
+*~
+\#*\#
+.\#*
+
+# Craiyon ignores
+mega-1-fp16/
+vqgan_imagenet_f16_16384/
