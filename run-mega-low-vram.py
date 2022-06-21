@@ -36,7 +36,6 @@ OOM (out of memory) on such lower end devices
 """
 
 import argparse
-import sys
 parser = argparse.ArgumentParser(description=__doc__, formatter_class = argparse.RawDescriptionHelpFormatter)
 parser.add_argument('-p', '--prompt', type=str, action="append",
                     help='The sentences this model will convert into images. each prompt requires you to type out --prompt="your prompt here"',
