@@ -34,6 +34,14 @@ recover intermediary states if it crashes before it can use vqgan to decode
 the images, but theoretically you could pickle the memory and write that
 to disk so you can recover any work lost. N is a number from 1->N for the number of images produced
 
+### Metadata
+
+I filled out some of the metadata such as image description for you using
+this script. Most websites will ignore it, but you may find it useful
+in the future, and maybe one day social media / chat apps will support
+"Textual information chunks" and exif ImageDescription properties for
+their alt text importers online.
+
 ## Install
 ### Download Models
 download to separate folders with files properly named
