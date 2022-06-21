@@ -54,7 +54,14 @@ parser.add_argument('--model', type=str, default='./mega-1-fp16',
 parser.add_argument('--vqgan', type=str, default='./vqgan_imagenet_f16_16384',
                     help='The directory the vqgan model (decoder) is stored in. Download https://huggingface.co/dalle-mini/vqgan_imagenet_f16_16384/tree/main into a folder, with the files named how they appear online, and give the path to the enclosing folder')
 
+parser.add_argument('-o', '--output-dir', dest="output", type=str, default='./images',
+                    help='The directory the vqgan model (decoder) is stored in. Download https://huggingface.co/dalle-mini/vqgan_imagenet_f16_16384/tree/main into a folder, with the files named how they appear online, and give the path to the enclosing folder')
+
 args = parser.parse_args()
+
+images_dir = args.output
+from pathlib import Path
+Path(images_dir).mkdir(parents=True, exist_ok=True)
 
 # number of predictions per prompt
 n_predictions = args.predictions
@@ -62,7 +69,10 @@ n_predictions = args.predictions
 # Model references
 # dalle-mega
 DALLE_MODEL = args.model  # can be wandb artifact or 🤗 Hub or local folder or google bucket
-if not DALLE_MODEL.startswith("../") and not DALLE_MODEL.startswith("./") and not DALLE_MODEL.startswith("/"):
+
+def isPath(s):
+    return s.startswith("../") or s.startswith("./") or s.startswith("/")
+if not isPath(DALLE_MODEL):
     DALLE_MODEL = "./" + DALLE_MODEL
 prompts = args.prompt
 DALLE_COMMIT_ID = None
@@ -70,9 +80,13 @@ DALLE_COMMIT_ID = None
 # if the notebook crashes too often you can use dalle-mini instead by uncommenting below line
 #DALLE_MODEL = "./mini"
 
+VQGAN_REPO = args.vqgan
 # VQGAN model
-VQGAN_REPO = "./vqgan_imagenet_f16_16384"
+if not isPath(VQGAN_REPO):
+    VQGAN_REPO = "./" + VQGAN_REPO
 VQGAN_COMMIT_ID = None#"e93a26e7707683d349bf5d5c41c5b0ef69b677a9"
+
+
 import jax
 import jax.numpy as jnp
 
@@ -180,7 +194,7 @@ for prompt in prompts:
         for decoded_img in decoded_images:
             img = Image.fromarray(np.asarray(decoded_img * 255, dtype=np.uint8))
             nameCounter += 1
-            img.save("./images/{}-{}.png".format(nameCounter, uuid.uuid4()))
+            img.save("{}/{}-{}.png".format(images_dir, nameCounter, uuid.uuid4()))
             print("saved {}".format(j))
         j+=1
 del vqgan_params
