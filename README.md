@@ -43,5 +43,5 @@ computer during part of them
 !pip install -q git+https://github.com/patil-suraj/vqgan-jax.git
 
 ## Credit
-The ideas to run this locally were taken from suggestions from
+The ideas to run this with low VRAM were taken from suggestions from
 https://github.com/dlivitz/dalle-playground/tree/main/backend
