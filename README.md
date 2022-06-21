@@ -42,3 +42,6 @@ computer during part of them
 !pip install -q dalle-mini
 !pip install -q git+https://github.com/patil-suraj/vqgan-jax.git
 
+## Credit
+The ideas to run this locally were taken from suggestions from
+https://github.com/dlivitz/dalle-playground/tree/main/backend
