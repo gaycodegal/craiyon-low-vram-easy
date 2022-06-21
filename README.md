@@ -21,6 +21,15 @@ OOM (out of memory) on such lower end devices
 python3 run-mega-low-vram.py --prompt "frog under a bridge" --prompt "frog on a mushroom" -n 2
 python3 run-mega-low-vram.py --prompt "the Eiffel tower landing on the moon"
 
+### Filenames
+
+The script will name files {n}-{uuid4}.png. I inserted a uuid4 so that multiple
+runs of this script won't overwrite previous runs. This code takes a while
+to run, so like losing work is really bad. I haven't coded in anything to
+recover intermediary states if it crashes before it can use vqgan to decode
+the images, but theoretically you could pickle the memory and write that
+to disk so you can recover any work lost. N is a number from 1->N for the number of images produced
+
 ## Install
 ### Download Models
 download to separate folders with files properly named
@@ -46,5 +55,13 @@ Note: use python 3. pip --version must say python 3.xxxx
 !pip install -q git+https://github.com/patil-suraj/vqgan-jax.git
 
 ## Credit
+The original source script came from [this APACHE 2.0 licensed jupyter notebook][inference_pipeline]
+by borisdayma
+
 The ideas to run this with low VRAM were taken from suggestions from
 https://github.com/dlivitz/dalle-playground/tree/main/backend
+
+## License
+You just have to credit the original author of craiyon with its APACHE 2.0 license
+
+[inference_pipeline]: https://github.com/borisdayma/dalle-mini/blob/main/tools/inference/inference_pipeline.ipynb

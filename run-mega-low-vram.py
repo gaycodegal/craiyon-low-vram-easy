@@ -8,6 +8,13 @@ If multiple GPUs are detected I'm pretty sure this script
 will attempt to use both of them, which may cause issues if one
 of them is very bad.
 
+The script will name files 1-{uuid4}.png. I inserted a uuid4 so that multiple
+runs of this script won't overwrite previous runs. This code takes a while
+to run, so like losing work is really bad. I haven't coded in anything to
+recover intermediary states if it crashes before it can use vqgan to decode
+the images, but theoretically you could pickle the memory and write that
+to disk so you can recover any work lost.
+
 Please see README.md for more information.
 
 download to separate folders with files properly named
@@ -39,9 +46,9 @@ import argparse
 parser = argparse.ArgumentParser(description=__doc__, formatter_class = argparse.RawDescriptionHelpFormatter)
 parser.add_argument('-p', '--prompt', type=str, action="append",
                     help='The sentences this model will convert into images. each prompt requires you to type out --prompt="your prompt here"',
-                    default=["sunset over a lake in the mountains", "the Eiffel tower landing on the moon"])
+                    default=[])
 
-parser.add_argument('-n', '--n-predictions', dest='predictions', default=8,
+parser.add_argument('-n', '--n-predictions', type=int, dest='predictions', default=8,
                     help='The number of images the model will update for each prompt. If you have 3 prompts and 8 predictions per prompt, you will receive 24 images.')
 
 # listen technically it can load from wandb, but for me I found that it tried to download the model every time??
@@ -74,6 +81,8 @@ def isPath(s):
 if not isPath(DALLE_MODEL):
     DALLE_MODEL = "./" + DALLE_MODEL
 prompts = args.prompt
+if len(prompts) == 0:
+    prompts = ["sunset over a lake in the mountains", "the Eiffel tower landing on the moon"]
 DALLE_COMMIT_ID = None
 
 # if the notebook crashes too often you can use dalle-mini instead by uncommenting below line
@@ -85,6 +94,8 @@ if not isPath(VQGAN_REPO):
     VQGAN_REPO = "./" + VQGAN_REPO
 VQGAN_COMMIT_ID = None#"e93a26e7707683d349bf5d5c41c5b0ef69b677a9"
 
+print(f"\nPrompts: {prompts}\n")
+print(f"N_predictions: {n_predictions}\n")
 
 import jax
 import jax.numpy as jnp
@@ -151,7 +162,6 @@ import numpy as np
 from PIL import Image
 from tqdm.notebook import trange
 
-print(f"Prompts: {prompts}\n")
 # generate images
 encoded_images_array = []
 nameCounter=0
