@@ -22,6 +22,7 @@ python3 run-mega-low-vram.py --prompt "frog under a bridge" --prompt "frog on a 
 python3 run-mega-low-vram.py --prompt "the Eiffel tower landing on the moon"
 
 ## Install
+### Download Models
 download to separate folders with files properly named
 
 `./mega-1-fp16`
@@ -32,13 +33,15 @@ https://wandb.ai/dalle-mini/dalle-mini/artifacts/DalleBart_model/mega-1-fp16/lat
 
 https://huggingface.co/dalle-mini/vqgan_imagenet_f16_16384/tree/main
 
-## CUDA installation for linux
+### CUDA installation for linux
 https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
 both `cuda nvidia-cudnn` packages required
 
 NOTE: There are post install steps for CUDA, which includes rebooting your
 computer during part of them
 
+### pip installation
+Note: use python 3. pip --version must say python 3.xxxx
 !pip install -q dalle-mini
 !pip install -q git+https://github.com/patil-suraj/vqgan-jax.git
 
