@@ -20,8 +20,10 @@ OOM (out of memory) on such lower end devices
 
 ### Example use
 
+```shell
 python3 run-mega-low-vram.py --prompt "frog under a bridge" --prompt "frog on a mushroom" -n 2
 python3 run-mega-low-vram.py --prompt "the Eiffel tower landing on the moon"
+```
 
 ### Filenames
 
