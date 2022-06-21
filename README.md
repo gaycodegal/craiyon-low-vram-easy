@@ -6,7 +6,7 @@ If multiple GPUs are detected I'm pretty sure this script
 will attempt to use both of them, which may cause issues if one
 of them is very bad.
 
-WARNING: You may only be able to have basic programs like a text editor and terminal open at the same time as you run this script. I don't know if it can handle having a browser open at the same time on a low end device. I have 16GB RAM and a 1060 mobile GPU and it was taxing most of my GPU, many of my computer cores, and 12GB resting RAM.
+WARNING: You may only be able to have basic programs like a text editor and terminal open at the same time as you run this script. I've had it crash if firefox was open at the same time, so don't do that. I have 16GB RAM and a 1060 mobile GPU and it was taxing most of my GPU, many of my computer cores, and 12GB resting RAM.
 
 ## Usage
 ### Memory Issues
