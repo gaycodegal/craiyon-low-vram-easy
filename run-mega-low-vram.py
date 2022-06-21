@@ -64,6 +64,8 @@ parser.add_argument('-o', '--output-dir', dest="output", type=str, default='./im
                     help='The directory the vqgan model (decoder) is stored in. Download https://huggingface.co/dalle-mini/vqgan_imagenet_f16_16384/tree/main into a folder, with the files named how they appear online, and give the path to the enclosing folder')
 
 args = parser.parse_args()
+print("WARNING: Consider closing other programs when running this script")
+
 
 images_dir = args.output
 from pathlib import Path
