@@ -10,6 +10,7 @@ __pycache__/
 
 # Craiyon ignores
 mega-1-fp16/
+mini/
 vqgan_imagenet_f16_16384/
 
 # this script
